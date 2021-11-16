@@ -15,3 +15,6 @@
 //     return view('welcome');
 // });
 Route::get('/', 'HomeController@index');
+
+Route::get('my-validate-1', 'MyValidate1Controller@index');
+Route::post('my-validate-1/save', 'MyValidate1Controller@save');
