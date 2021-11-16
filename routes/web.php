@@ -11,10 +11,12 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/', 'HomeController@index');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('my-validate-1', 'MyValidate1Controller@index');
-Route::post('my-validate-1/save', 'MyValidate1Controller@save');
+Route::get('/home', 'HomeController@index');
+Route::get('/home/my-srv1', 'HomeController@mySrv1');
+
+Route::get('/my-validate-1', 'MyValidate1Controller@index');
+Route::post('/my-validate-1/save', 'MyValidate1Controller@save');
