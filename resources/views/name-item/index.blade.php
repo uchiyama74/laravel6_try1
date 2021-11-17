@@ -4,12 +4,21 @@
     </head>
     <body>
         <h1>NameItem Index</h1>
-        <p>{{ $msg ?? '' }}</p>
+        @error('code')
+        <div>{{ $message }}</div>
+        @enderror
+        @error('name')
+        <div>{{ $message }}</div>
+        @enderror
+        @error('kana')
+        <div>{{ $message }}</div>
+        @enderror
+        <pre>{{ $msg ?? '' }}</pre>
         <form action="{{ route('name-item-store') }}" method="post">
             @csrf
-            コード：<input type="text" name="code"><br>
-            名前：<input type="text" name="name"><br>
-            カナ：<input type="text" name="kana"><br>
+            コード：<input type="text" name="code" value="{{ old('code') }}"><br>
+            氏名：<input type="text" name="name" value="{{ old('name') }}"><br>
+            カナ：<input type="text" name="kana" value="{{ old('kana') }}"><br>
             <input type="submit" value="登録">
         </form>
     </body>
