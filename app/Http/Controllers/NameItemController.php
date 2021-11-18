@@ -28,4 +28,13 @@ class NameItemController extends Controller
             'msg' => $msg
         ]);
     }
+
+    public function show(NameItem $nameItem)
+    {
+        $msg = "取得しました。\n{$nameItem->c_code}\n{$nameItem->c_name}\n{$nameItem->c_kana_name}\n";
+
+        return view('name-item.index', [
+            'msg' => $msg
+        ]);
+    }
 }
