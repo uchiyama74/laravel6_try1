@@ -14,6 +14,9 @@
         <div>{{ $message }}</div>
         @enderror
         <pre>{{ $msg ?? '' }}</pre>
+        @if (isset($lastShowId))
+        <div>Last Show ID：{{ $lastShowId }}</div><br>
+        @endif
         @if (isset($showUrl))
         <div><a href="{{ $showUrl }}">Signed Show URL here.</a></div><br>
         @endif

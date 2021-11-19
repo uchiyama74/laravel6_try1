@@ -22,6 +22,9 @@ Route::get('/my-validate-1', 'MyValidate1Controller@index');
 // Route::post('/my-validate-1/save', 'MyValidate1Controller@save');
 Route::post('/my-validate-1/save', 'MyValidate1Controller@save')->middleware('checkage');
 
-Route::get('/name-item', function () { return view('name-item.index'); });
+Route::get('/name-item', function () {
+    // logger(session()->all());
+    return view('name-item.index', ['lastShowId' => session('lastShowId', null)]);
+});
 Route::post('/name-item/store', 'NameItemController@store')->name('name-item-store');
 Route::get('/name-item/show/{nameItem}', 'NameItemController@show')->name('name-item-show');
