@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use App\NameItem;
 use App\Rules\KanjiName;
 
@@ -24,13 +25,20 @@ class NameItemController extends Controller
 
         $msg = "登録しました。\n{$nameItem->c_code}\n{$nameItem->c_name}\n{$nameItem->c_kana_name}\n";
 
+        $showUrl = URL::temporarySignedRoute('name-item-show', now()->addMinutes(1), ['nameItem' => $nameItem, 'signedFlag' => '1']);
+
         return view('name-item.index', [
-            'msg' => $msg
+            'msg' => $msg,
+            'showUrl' => $showUrl
         ]);
     }
 
-    public function show(NameItem $nameItem)
+    public function show(Request $request, NameItem $nameItem)
     {
+        if ($request->query('signedFlag', '0') && !$request->hasValidSignature()) {
+            abort(401);
+        }
+
         $msg = "取得しました。\n{$nameItem->c_code}\n{$nameItem->c_name}\n{$nameItem->c_kana_name}\n";
 
         return view('name-item.index', [

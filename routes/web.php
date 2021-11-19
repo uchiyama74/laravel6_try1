@@ -24,4 +24,4 @@ Route::post('/my-validate-1/save', 'MyValidate1Controller@save')->middleware('ch
 
 Route::get('/name-item', function () { return view('name-item.index'); });
 Route::post('/name-item/store', 'NameItemController@store')->name('name-item-store');
-Route::get('/name-item/show/{nameItem}', 'NameItemController@show');
+Route::get('/name-item/show/{nameItem}', 'NameItemController@show')->name('name-item-show');
