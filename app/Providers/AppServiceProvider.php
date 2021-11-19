@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::share('titlePrefix', '【Laravel6Try1】');
+
+        View::composer('name-item.index', function ($view) {
+            if (!$view->offsetExists('msg')) return;
+
+            $msg = $view->offsetGet('msg');
+            if ($msg) {
+                $msg = "※{$msg}\n";
+                $view->with('msg', $msg);
+            }
+        });
     }
 }

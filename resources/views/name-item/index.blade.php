@@ -1,9 +1,9 @@
 <html>
     <head>
-        <title>NameItem Index</title>
+        <title>{{ $titlePrefix }} NameItem Index</title>
     </head>
     <body>
-        <h1>NameItem Index</h1>
+        <h1>{{ $titlePrefix }} NameItem Index</h1>
         @error('code')
         <div>{{ $message }}</div>
         @enderror
