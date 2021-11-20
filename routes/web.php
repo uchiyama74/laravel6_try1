@@ -28,3 +28,6 @@ Route::get('/name-item', function () {
 });
 Route::post('/name-item/store', 'NameItemController@store')->name('name-item-store');
 Route::get('/name-item/show/{nameItem}', 'NameItemController@show')->name('name-item-show');
+
+Route::get('/post/create', 'PostController@create');
+Route::post('/post/store', 'PostController@store');
