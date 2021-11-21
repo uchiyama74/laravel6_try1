@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::component('components.my_alert', 'my_direct_alert');
+
         View::share('titlePrefix', '【Laravel6Try1】');
 
         View::composer('name-item.index', function ($view) {
