@@ -43,6 +43,7 @@ return [
 
         'api' => [
             'driver' => 'token',
+            // 'driver' => 'my-auth',
             'provider' => 'users',
             'hash' => false,
         ],

@@ -20,9 +20,10 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/try1', 'Try1Controller@index');
+// Route::get('/try1', 'Try1Controller@index')->middleware('auth:api');
 Route::get('/try1/my-srv1', 'Try1Controller@mySrv1');
 
-Route::get('/my-validate-1', 'MyValidate1Controller@index');
+Route::get('/my-validate-1', 'MyValidate1Controller@index')->middleware('auth.basic');
 // Route::post('/my-validate-1/save', 'MyValidate1Controller@save');
 Route::post('/my-validate-1/save', 'MyValidate1Controller@save')->middleware('checkage');
 
@@ -33,5 +34,8 @@ Route::get('/name-item', function () {
 Route::post('/name-item/store', 'NameItemController@store')->name('name-item-store');
 Route::get('/name-item/show/{nameItem}', 'NameItemController@show')->name('name-item-show');
 
-Route::get('/post/create', 'PostController@create');
-Route::post('/post/store', 'PostController@store');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/post/create', 'PostController@create');
+    Route::post('/post/store', 'PostController@store')->middleware(['password.confirm']);
+});
+
