@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Services\MySrv1Service;
 
-class HomeController extends Controller
+class Try1Controller extends Controller
 {
     protected $mySrv1Service;
 
@@ -18,12 +18,12 @@ class HomeController extends Controller
     public function index()
     {
         $postBody = Post::where('title', 'Title1')->first()->body;
-        return view('home.index', ['postBody' => $postBody]);
+        return view('try1.index', ['postBody' => $postBody]);
     }
 
     public function mySrv1()
     {
-        return view('home.my-srv1', [
+        return view('try1.my-srv1', [
             'myDate' => $this->mySrv1Service->getDate(),
             'myArray' => $this->mySrv1Service->getArray()
         ]);
