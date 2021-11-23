@@ -14,6 +14,9 @@
         <div>{{ $message }}</div>
         @enderror
         <pre>{{ $msg ?? '' }}</pre>
+        @cannot('create', ['App\NameItem', 'foo2'])
+        <div>あなたは新規登録できません。</div><br>
+        @endcannot
         @if (isset($lastShowId))
         <div>Last Show ID：{{ $lastShowId }}</div><br>
         @endif

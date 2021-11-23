@@ -32,7 +32,8 @@ Route::get('/name-item', function () {
     return view('name-item.index', ['lastShowId' => session('lastShowId', null)]);
 });
 Route::post('/name-item/store', 'NameItemController@store')->name('name-item-store');
-Route::get('/name-item/show/{nameItem}', 'NameItemController@show')->name('name-item-show')->middleware(['password.confirm']);
+// Route::get('/name-item/show/{nameItem}', 'NameItemController@show')->name('name-item-show')->middleware('password.confirm');
+Route::get('/name-item/show/{nameItem}', 'NameItemController@show')->name('name-item-show')->middleware('can:view,nameItem');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/post/create', 'PostController@create');
