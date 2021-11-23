@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
-
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Console Routes
@@ -16,3 +16,14 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('user-name {user}', function () {
+    $user = User::find($this->argument('user'));
+    if (!$user) {
+        $this->error("引数「user」が不正です。");
+        return 1;
+    }
+
+    $this->info("{$user->id}：{$user->name}");
+    return 0;
+});
