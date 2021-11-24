@@ -21,7 +21,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/try1', 'Try1Controller@index');
 // Route::get('/try1', 'Try1Controller@index')->middleware('auth:api');
+Route::get('/try1/mail', 'Try1Controller@mail')->middleware('auth');
 Route::get('/try1/my-srv1', 'Try1Controller@mySrv1');
+
+Route::get('/my-try1-mail/preview/{user}', function (App\User $user) {
+    return new App\Mail\MyTry1Mail($user);
+});
 
 Route::get('/my-validate-1', 'MyValidate1Controller@index')->middleware('auth.basic');
 // Route::post('/my-validate-1/save', 'MyValidate1Controller@save');
