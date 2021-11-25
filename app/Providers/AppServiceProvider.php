@@ -25,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \App\Post::observe(\App\Observers\PostObserver::class);
+
         Blade::component('components.my_alert', 'my_direct_alert');
 
         View::share('titlePrefix', '【Laravel6Try1】');
