@@ -9,5 +9,9 @@ class Post extends Model
 {
     use SoftDeletes;
 
+    protected $dispatchesEvents = [
+        'created' => 'App\Events\MyEvent1'
+    ];
+
     protected $fillable = ['title', 'body'];
 }
