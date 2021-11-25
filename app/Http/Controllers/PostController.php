@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Post;
 use App\Http\Requests\StorePost;
@@ -37,5 +38,13 @@ class PostController extends Controller
         return view('post.create', [
             'resultMsg' => '登録しました。'
         ]);
+    }
+
+    public function list()
+    {
+        $postsPaginator = DB::table('posts')->paginate(3);
+        // $postsPaginator = DB::table('posts')->simplePaginate(2);
+
+        return view('post.list', ['postsPaginator' => $postsPaginator]);
     }
 }

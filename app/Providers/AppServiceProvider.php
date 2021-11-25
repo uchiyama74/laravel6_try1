@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \App\Post::observe(\App\Observers\PostObserver::class);
+
+        // Paginator::defaultView('vendor.pagination.default');
+        // Paginator::defaultSimpleView('vendor.pagination.simple-default');
 
         Blade::component('components.my_alert', 'my_direct_alert');
 

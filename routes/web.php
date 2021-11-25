@@ -43,5 +43,5 @@ Route::get('/name-item/show/{nameItem}', 'NameItemController@show')->name('name-
 Route::middleware(['auth'])->group(function () {
     Route::get('/post/create', 'PostController@create');
     Route::post('/post/store', 'PostController@store');
+    Route::get('/post/list', 'PostController@list');
 });
-
