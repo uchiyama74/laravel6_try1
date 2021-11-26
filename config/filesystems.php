@@ -65,6 +65,21 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'sftp' => [
+            'driver' => 'sftp',
+            'host' => 'my-sftp',
+            'username' => 'user1',
+            'password' => '',
+
+            // SSH keyベースの認証の設定
+            // 'privateKey' => '/path/to/privateKey',
+            // 'password' => 'encryption-password',
+
+            // FTP設定のオプション
+            'port' => 22,
+            // 'root' => 'my_sftp_root',
+            'timeout' => 30,
+        ],
     ],
 
 ];

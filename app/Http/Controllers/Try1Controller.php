@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use App\Post;
 use App\Mail\MyTry1Mail;
 use App\Services\MySrv1Service;
@@ -19,9 +20,9 @@ class Try1Controller extends Controller
 
     public function index()
     {
-        // $postBody = Post::where('title', 'Title1')->first()->body;
-        // return view('try1.index', ['postBody' => $postBody]);
-        return view('try1.index');
+        $storageTry1TxtUrl = Storage::url('public/storage_try1.txt');
+
+        return view('try1.index', ['storageTry1TxtUrl' => $storageTry1TxtUrl]);
     }
 
     public function mail(Request $request)
@@ -37,5 +38,24 @@ class Try1Controller extends Controller
             'myDate' => $this->mySrv1Service->getDate(),
             'myArray' => $this->mySrv1Service->getArray()
         ]);
+    }
+
+    public function upload(Request $request)
+    {
+        if (!$request->hasFile('uploadFile')) {
+            return view('try1.upload-form', ['msg' => 'ファイルを選択してください。']);
+        }
+
+        $uploadFile = $request->file('uploadFile');
+        if (!$uploadFile->isValid()) {
+            return view('try1.upload-form', ['msg' => 'アップロードが失敗しました。']);
+        }
+
+        $uploadedPath = $uploadFile->store('uploaded');
+        if (!$uploadedPath) {
+            return view('try1.upload-form', ['msg' => 'アップロードの保存が失敗しました。']);
+        }
+
+        return view('try1.upload-form', ['msg' => "アップロードが成功しました。（{$uploadedPath}）"]);
     }
 }

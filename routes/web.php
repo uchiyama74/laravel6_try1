@@ -23,6 +23,10 @@ Route::get('/try1', 'Try1Controller@index');
 // Route::get('/try1', 'Try1Controller@index')->middleware('auth:api');
 Route::get('/try1/mail', 'Try1Controller@mail')->middleware('auth');
 Route::get('/try1/my-srv1', 'Try1Controller@mySrv1');
+Route::get('/try1/upload-form', function () {
+    return view('try1.upload-form');
+});
+Route::post('/try1/upload', 'Try1Controller@upload');
 
 Route::get('/my-try1-mail/preview/{user}', function (App\User $user) {
     return new App\Mail\MyTry1Mail($user);
@@ -45,3 +49,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/post/store', 'PostController@store');
     Route::get('/post/list', 'PostController@list');
 });
+
+Route::get('/downloads/storage-try1.txt', function () {
+    return Storage::download('public/storage_try1.txt');
+});
+
+// Route::get('/downloads/storage-sftp-try1.txt', function () {
+//     return Storage::disk('sftp')->download('storage_sftp_try1.txt');
+// });
