@@ -48,6 +48,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/post/create', 'PostController@create');
     Route::post('/post/store', 'PostController@store');
     Route::get('/post/list', 'PostController@list');
+    Route::get('/post/json/{postId}', function () {
+        $post = \App\Post::withTrashed()->find(request('postId'));
+        return new \App\Http\Resources\PostResource($post);
+    });
+    Route::get('/posts/json', function () {
+        $posts = \App\Post::all();
+        return \App\Http\Resources\PostResource::collection($posts->keyBy('created_at')->sortByDesc('created_at'))
+            ->additional(['meta' => [
+                'key2' => 'value2',
+            ]]);
+    });
+    Route::get('/post/list/json', function () {
+        // $posts = \App\Post::all();
+        $posts = \App\Post::paginate(5);
+        return new \App\Http\Resources\PostsResource($posts);
+    });
 });
 
 Route::get('/downloads/storage-try1.txt', function () {

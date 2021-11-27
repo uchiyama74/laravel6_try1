@@ -14,4 +14,6 @@ class Post extends Model
     ];
 
     protected $fillable = ['title', 'body'];
+
+    protected $dateFormat = 'Y-m-d H:i:s';
 }
