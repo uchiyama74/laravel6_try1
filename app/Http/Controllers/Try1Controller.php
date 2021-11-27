@@ -58,4 +58,11 @@ class Try1Controller extends Controller
 
         return view('try1.upload-form', ['msg' => "アップロードが成功しました。（{$uploadedPath}）"]);
     }
+
+    public function pushTry1Job()
+    {
+        \App\Jobs\Try1Job::dispatch()->onConnection('redis')->delay(60);
+
+        return view('try1.index', ['msg' => 'Try1Jobを投入しました。']);
+    }
 }

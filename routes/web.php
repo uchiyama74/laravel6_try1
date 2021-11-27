@@ -27,6 +27,7 @@ Route::get('/try1/upload-form', function () {
     return view('try1.upload-form');
 });
 Route::post('/try1/upload', 'Try1Controller@upload');
+Route::get('/try1/push-try1-job', 'Try1Controller@pushTry1Job');
 
 Route::get('/my-try1-mail/preview/{user}', function (App\User $user) {
     return new App\Mail\MyTry1Mail($user);

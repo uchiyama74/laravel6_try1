@@ -25,9 +25,10 @@
     <a href="/try1/mail">MyTry1Mailを送信する。</a><br>
     <br>
     @endauth
-    @if ($storageTry1TxtUrl)
+    @if (!empty($storageTry1TxtUrl))
     リンク：<a href="{!! $storageTry1TxtUrl !!}">storage_try1.txt</a><br>
     ダウンロード：<a href="/downloads/storage-try1.txt">storage_try1.txt</a><br>
     <br>
     @endif
+    <a href="/try1/push-try1-job">Try1Jobを投入する。</a>
 @endsection
