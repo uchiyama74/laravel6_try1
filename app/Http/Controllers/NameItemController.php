@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Notification;
 use App\NameItem;
+use App\User;
 use App\Rules\KanjiName;
+use App\Notifications\Try1Notice;
 
 class NameItemController extends Controller
 {
@@ -63,7 +66,17 @@ class NameItemController extends Controller
         $msg = "取得しました。\n{$nameItem->c_code}\n{$nameItem->c_name}\n{$nameItem->c_kana_name}\n";
 
         return view('name-item.index', [
-            'msg' => $msg
+            'msg' => $msg,
+            'nameItem' => $nameItem
         ]);
+    }
+
+    public function sendTry1Notice(Request $request, NameItem $nameItem)
+    {
+        // $request->user()->notifyNow(new Try1Notice());
+        $emailTo = User::findOrFail($nameItem->owner_id)->email;
+        Notification::route('mail', $emailTo)->notifyNow(new Try1Notice());
+
+        return $this->show($request, $nameItem);
     }
 }

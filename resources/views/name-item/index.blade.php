@@ -30,5 +30,9 @@
             カナ：<input type="text" name="kana" value="{{ old('kana') }}"><br>
             <input type="submit" value="登録">
         </form>
+        @if(!empty($nameItem) && $nameItem->owner_id)
+        <a href="/name-item/send-try1-notice/{{ $nameItem->id }}">Try1Noticeを送る。</a><br>
+        <br>
+        @endif
     </body>
 </html>
