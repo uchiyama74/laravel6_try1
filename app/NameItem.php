@@ -20,7 +20,7 @@ class NameItem extends Model
 
     public function getOwnerNameAttribute()
     {
-        return  $this->user->name;
+        return  optional($this->user)->name;
     }
 
     public function scopeHasOwner($query)
