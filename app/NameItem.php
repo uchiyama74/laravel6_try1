@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NameItem extends Model
 {
-    protected $appends = ['owner_name'];
+    // protected $appends = ['owner_name'];
 
     protected $casts = [
         'created_at' => 'datetime:Y-m-d',
