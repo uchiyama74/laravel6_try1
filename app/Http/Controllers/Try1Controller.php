@@ -61,7 +61,8 @@ class Try1Controller extends Controller
 
     public function pushTry1Job()
     {
-        \App\Jobs\Try1Job::dispatch()->onConnection('redis')->delay(60);
+        $result = \App\Jobs\Try1Job::dispatch()->onConnection('redis')->delay(30);
+        // info('---try1.pushTry1Job result: ' . var_export($result, true));
 
         return view('try1.index', ['msg' => 'Try1Jobを投入しました。']);
     }
